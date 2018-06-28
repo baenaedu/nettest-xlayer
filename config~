@@ -1,0 +1,6 @@
+{
+  "cnf_server_host": "bulk.se.monroe-system.eu",
+  "cnf_server_port": 10080
+  "cnf_dl_duration_s": 10,              # nominal duration for downlink measurement
+  "cnf_ul_duration_s": 10,              # nominal duration for uplink measurement
+}
