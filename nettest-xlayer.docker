@@ -21,6 +21,11 @@ RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -
 # allow -i option to traceroute for non-root users:
 RUN setcap cap_net_raw+ep /usr/bin/traceroute.db
 
+RUN ifconfig eth1 172.16.253.1 netmask 255.255.255.0
+&& ifconfig eth1 up
+&& ip link set eth1 netns monroe
+
+
 RUN apt-get update && apt-get install sshpass && apt-get install nodejs -y
 
 COPY files/* /opt/monroe/

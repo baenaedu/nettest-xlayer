@@ -1,6 +1,5 @@
 #!/bin/bash
-ifconfig eth1 172.16.253.1 netmask 255.255.255.0
-sleep 5
+
 sshpass -p "odroid" scp -o StrictHostKeyChecking=no /opt/monroe/airscopefix.sh root@172.16.253.2:/home/odroid/airscope
 odroidname=$(sshpass -p "odroid" ssh -o StrictHostKeyChecking=no -R 8080:localhost:8080 root@172.16.253.2 'cat /etc/hostname')
 odroidfile=airscope_node_$odroidname
@@ -10,6 +9,5 @@ nodejs /opt/monroe/nodejs_server/server.js &
 PID2=$!
 /usr/bin/python /opt/monroe/nettest.py &
 PID3=$!
-sleep 120;
-sudo kill -9 $PID3
+wait PID3;
 cp $odroidfile /monroe/results/
